@@ -3,6 +3,7 @@
 A Model Context Protocol (MCP) server that exposes Steel Browser automation over HTTP.
 It runs a Puppeteer-backed browser session and gives MCP clients standardized tools for browser control.
 Use it when you want Codex, Claude Code/Desktop, OpenCode, or Antigravity to drive Steel Browser.
+It exists so MCP clients can control Steel Browser through one standardized HTTP endpoint.
 
 Core capabilities:
 - HTTP MCP endpoint for browser automation
