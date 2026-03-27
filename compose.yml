@@ -1,0 +1,56 @@
+services:
+  api:
+    container_name: steel-browser-api
+    image: ghcr.io/steel-dev/steel-browser-api:latest
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - logs:/data/logs
+      - exports:/tmp/steel-browser-exports
+      - ./.cache:/app/.cache
+    environment:
+      - DOMAIN=${DOMAIN:-localhost:3000}
+      - CDP_DOMAIN=${CDP_DOMAIN:-localhost:9223}
+      - LOG_STORAGE_ENABLED=true
+      - LOG_STORAGE_PATH=/data/logs/browser-logs.duckdb
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsSL http://localhost:3000/documentation/ >/dev/null"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 30s
+
+  ui:
+    container_name: steel-browser-ui
+    image: ghcr.io/steel-dev/steel-browser-ui:latest
+    restart: unless-stopped
+    ports:
+      - "5171:80"
+    environment:
+      - API_URL=${API_URL:-http://host.docker.internal:3000}
+    depends_on:
+      api:
+        condition: service_healthy
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  mcp:
+    container_name: steel-mcp-server
+    build:
+      context: .
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - MCP_HTTP_HOST=0.0.0.0
+      - MCP_HTTP_PORT=8787
+      - STEEL_BASE_URL=${MCP_STEEL_BASE_URL:-http://localhost:3000}
+      - GLOBAL_WAIT_SECONDS=${MCP_GLOBAL_WAIT_SECONDS:-1}
+    depends_on:
+      api:
+        condition: service_healthy
+
+volumes:
+  logs:
+    driver: local
+  exports:
+    driver: local
