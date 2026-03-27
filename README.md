@@ -1,6 +1,6 @@
 # Steel MCP Server
 
-Install Steel Browser MCP in minutes with Docker and connect via an HTTP MCP endpoint.
+Install Steel Browser MCP quickly with Docker and connect via a single HTTP MCP endpoint.
 
 ## Getting Started
 
