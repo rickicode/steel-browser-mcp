@@ -10,8 +10,10 @@ By default, the server is text-first: tool results return text and resources, wh
 
 See [README.md](./README.md) for install and onboarding.
 
+<a id="client-setup"></a>
 ## Client Setup
 
+<a id="codex"></a>
 <details>
 <summary>Codex</summary>
 
@@ -31,6 +33,7 @@ codex mcp add steel-browser http://localhost:8787/mcp
 
 </details>
 
+<a id="claude-code"></a>
 <details>
 <summary>Claude Code</summary>
 
@@ -55,6 +58,7 @@ claude mcp add steel-browser http://localhost:8787/mcp --type http
 
 </details>
 
+<a id="claude-desktop"></a>
 <details>
 <summary>Claude Desktop</summary>
 
@@ -62,6 +66,7 @@ Add the standard config above in a connector that supports HTTP MCP. If the serv
 
 </details>
 
+<a id="opencode"></a>
 <details>
 <summary>OpenCode</summary>
 
@@ -82,6 +87,7 @@ Use `~/.config/opencode/opencode.json`:
 
 </details>
 
+<a id="antigravity"></a>
 <details>
 <summary>Antigravity</summary>
 
@@ -95,6 +101,7 @@ Antigravity also supports file-based configuration under `<repo_root>/.vscode/mc
 
 </details>
 
+<a id="verify"></a>
 ## Verify
 
 Check the health endpoint:
